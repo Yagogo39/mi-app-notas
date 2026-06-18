@@ -1,10 +1,9 @@
 <?php
-// config/db_connection.php
 
-$envPath = __DIR__ . '/../.env';
+$env = __DIR__ . '/../.env';
 
-if (file_exists($envPath)) {
-    $env = parse_ini_file($envPath);
+if (file_exists($env)) {
+    $env = parse_ini_file($env);
     $host = $env['host'] ?? null;
     $port = $env['port'] ?? null;
     $dbname = $env['database'] ?? null;

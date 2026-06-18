@@ -24,7 +24,7 @@ function crearPreferenciaPago() {
 
     $usuarioId = $input['usuario_id'];
     $titulo = $input['titulo'] ?? 'Plan Premium - Mis Notas';
-    $precio = $input['precio'] ?? 99.00;
+    $precio = $input['precio'] ?? 199.00;
 
     $preferenceData = [
         "items" => [
