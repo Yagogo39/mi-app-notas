@@ -1,14 +1,18 @@
 <?php
-// controllers/pago_controller.php
 
 require_once __DIR__ . '/../services/pago_service.php';
 
 function crearPreferenciaPago() {
-    $env = parse_ini_file(__DIR__ . '/../.env');
-    $mpToken = $env['MP_ACCESS_TOKEN'];
-    
-    // 🚀 Jalamos la URL base desde el .env (Si no existe, usa localhost por defecto)
-    $baseUrl = $env['BACKEND_URL'] ?? 'http://localhost:8000';
+    $envPath = __DIR__ . '/../.env';
+
+    if (file_exists($envPath)) {
+        $env = parse_ini_file($envPath);
+        $mpToken = $env['MP_ACCESS_TOKEN'] ?? null;
+        $baseUrl = $env['BACKEND_URL'] ?? 'http://localhost:8000';
+    } else {
+        $mpToken = getenv('MP_ACCESS_TOKEN');
+        $baseUrl = getenv('BACKEND_URL');
+    };
 
     $input = json_decode(file_get_contents('php://input'), true);
 
@@ -33,7 +37,6 @@ function crearPreferenciaPago() {
         ],
         "external_reference" => (string)$usuarioId,
 
-        // 🚀 AQUÍ SE CONSTRUYE DINÁMICAMENTE CON LA VARIABLE
         "notification_url" => $baseUrl . "/routes/webhook_pago.php",
         
         "back_urls" => [

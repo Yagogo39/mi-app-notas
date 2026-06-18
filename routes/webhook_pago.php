@@ -1,5 +1,4 @@
 <?php
-// routes/webhook_pago.php
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
@@ -18,8 +17,13 @@ if (!$type && isset($input['type'])) {
 
 if ($type === 'payment' && $paymentId) {
 
-    $env = parse_ini_file(__DIR__ . '/../.env');
-    $mpToken = $env['MP_ACCESS_TOKEN'];
+    $envPath = __DIR__ . '/../.env';
+    if (file_exists($envPath)) {
+        $env = parse_ini_file($envPath);
+        $mpToken = $env['MP_ACCESS_TOKEN'] ?? null;
+    } else {
+        $mpToken = getenv('MP_ACCESS_TOKEN');
+    }
     $ch = curl_init();
     curl_setopt_array($ch, [
         CURLOPT_URL => "https://api.mercadopago.com/v1/payments/" . $paymentId,
