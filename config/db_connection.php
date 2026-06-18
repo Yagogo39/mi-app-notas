@@ -5,17 +5,17 @@ $envPath = __DIR__ . '/../.env';
 
 if (file_exists($envPath)) {
     $env = parse_ini_file($envPath);
-    $host = $env['DB_HOST'] ?? null;
-    $port = $env['DB_PORT'] ?? null;
-    $dbname = $env['DB_NAME'] ?? null;
-    $user = $env['DB_USER'] ?? null;
-    $password = $env['DB_PASSWORD'] ?? null;
+    $host = $env['host'] ?? null;
+    $port = $env['port'] ?? null;
+    $dbname = $env['database'] ?? null;
+    $user = $env['user'] ?? null;
+    $password = $env['password'] ?? null;
 } else {
-    $host = getenv('DB_HOST');
-    $port = getenv('DB_PORT');
-    $dbname = getenv('DB_NAME');
-    $user = getenv('DB_USER');
-    $password = getenv('DB_PASSWORD');
+    $host = getenv('host');
+    $port = getenv('port');
+    $dbname = getenv('database');
+    $user = getenv('user');
+    $password = getenv('password');
 }
 
 try {
