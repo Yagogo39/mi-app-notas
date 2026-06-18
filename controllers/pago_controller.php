@@ -40,10 +40,11 @@ function crearPreferenciaPago() {
         "notification_url" => $baseUrl . "/routes/webhook_pago.php",
         
         "back_urls" => [
-            "success" => "http://localhost:5173",
-            "failure" => "http://localhost:5173",
-            "pending" => "http://localhost:5173"
+            "success" => "https://miapp-ludi-frontend.netlify.app",
+            "failure" => "https://miapp-ludi-frontend.netlify.app",
+            "pending" => "https://miapp-ludi-frontend.netlify.app"
         ],
+        "auto_return" => "approved",
     ];
 
     $ch = curl_init();
